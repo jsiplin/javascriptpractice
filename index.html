@@ -5,72 +5,18 @@
     <title></title>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<style>
-	</style>
+	<script src="./scripts/displaydata.js"></script>
+	<style></style>
 </head>
 <body>
 	<a href="table.html">Table</a>
 	<a href="barchartsimple.html">Simple Bar Chart</a>
 	<a href="barchart.html">Multi Bar Barchart</a>
 	<a href="practice.html">Practice with D3</a>
-	<script>
-	var csvurl = "./csvs/emailexample.csv"
-	function opsi(data) {
-		var allRows = data.split(/\r?\n|\r/);
-		var table = "<table>";
-		for (var singleRow=0; singleRow<allRows.length; singleRow++) {
-			if(singleRow === 0) {
-				table += "<thead>";
-				table += "<tr>";
-			} else {
-				table += "<tr>";
-			}
-			var rowCells = allRows[singleRow].split(',');
-			for (var rowSingleCell=0; rowSingleCell<rowCells.length; rowSingleCell++) {
-				if(singleRow === 0){
-						table += "<th>";
-						table += rowCells[rowSingleCell];
-						table += "</th>";
-				} else {
-						table += "<td>";
-						table += rowCells[rowSingleCell];
-						table += "</td>";
-						
-				}
-			}
-			if(singleRow === 0) {
-				table += "</tr>";
-				table += "</thead>";
-				table += "<tbody>";
-			} else {
-				table += "</tr>";
-			}
-		}
-		table += "</tbody>";
-		table += "</table>";
-		$("body").append(table);
-	}
-	$.ajax({
-		url: csvurl,
-		dataType: "text",
-		
-	}).done(opsi);
-	</script>
-
 <script>
-	d3.selectAll("a").append('h1');
-	
+// Bumps Anchors up to H1s
+d3.selectAll("a").append('h1');
 </script>
-
-			
 </body>
 </html>
 
-<script>
-		//Dataset remote https://github.com/fivethirtyeight/data/blob/master/avengers/avengers.csv
-		//use jquery to bring in data
-		//Dataset local AugtoAug21.csv
-		
-		
-
-</script>
