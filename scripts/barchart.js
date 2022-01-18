@@ -27,11 +27,25 @@ var svg = d3.select("#FemUnemployed")
 d3.csv("./csvs/emailexample.csv", function(error, data) {
 	if (error) throw error;
 	
+
 	// List of subgroups = header of the csv files
 	var subgroups = data.columns.slice(1)
 	
 	// List of groups = species here = value of the first column called group -> I show them on the X axis
 	var groups = d3.map(data, function(d){return(d.yearEmp)}).keys()
+	
+	// Find max y data
+	var runningMax = 100;
+	for (var iterate in subgroups) {
+		var col = subgroups[iterate];
+		var currentMax = Math.max.apply(Math, data.map(function(o) { return o[`${col}`]}));
+		if (currentMax > runningMax) {
+			runningMax = currentMax;
+		};
+	};
+	
+	//maxyaxis = runningMax/(0.9); Replace with height in code to Autoscale Y axis
+	maxyaxis = runningMax/(0.9);
 	// Add X axis
 	var x = d3.scaleBand()
 		.domain(groups)
@@ -43,7 +57,7 @@ d3.csv("./csvs/emailexample.csv", function(error, data) {
 
 	// Add Y axis
 	var y = d3.scaleLinear()
-		.domain([0, 1000])
+		.domain([0, maxyaxis])
 		.range([ height, 0 ]);
 	svg.append("g")
 		.call(d3.axisLeft(y));
